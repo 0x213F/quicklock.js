@@ -29,6 +29,10 @@ cd demo/
 node server.js <username> <password> <PIN> <# of allowed PIN attempts> <connection interval>
 ```
 
+### Customize the Demo
+
+Edit the file `/demo/home/script.js` to change how the demo behaves.
+
 ## Usage
 
 ### Front-End
