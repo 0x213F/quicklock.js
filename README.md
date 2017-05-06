@@ -5,7 +5,7 @@ the user must confirm their identity with a PIN.
 
 Consider a web application where highly sensitive information is presented to the user. In order to add an extra security factor, the application could lock whenever the window is de-focused (changed tab, the window is de-focused an AJAX request will be sent to a server to indicate that the page has been “locked” and the DOM will be cleared. The page will show a phone-style pin pad so that the user can unlock the webpage with their custom PIN (which will be initialized from a different interface). To unlock the webpage, an AJAX request is sent to the server. If there is a password match, then the contents of the DOM must be rebuilt and page “unlocked”.
 
-### Installing
+## Installing
 
 ```
 npm install password-hash
@@ -16,24 +16,42 @@ npm install path
 ## Running the Demo
 
 ```
+cd demo/
 node server.js <username> <password> <PIN> <# of allowed PIN attempts> <connection interval>
 ```
 
-### Usage
+## Usage
 
+### Front-End
 
-## Contributing
+```
+/* create an object with the data to setup an instance of quicklock.js */
+var obj = {
+    "clienttimeout" : 1000,             // ms until page locks
+    "servertimeout" : 2000,             // ms until checks server connection
+    "url" : "http://localhost:8080/",   // url for quicklock.js endpoints
+    "onlock" : onlock,                  // callback func for when page locks
+    "onunlock" : onunlock,              // callback func for when page unlocks
+    "onratelimited" : onratelimited,    // callback func for when too many PIN attempts
+    "ondisconnect" : ondisconnect       // callback func for when server is disconnected
+}
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+/* create an instance of quicklock.js */
+var foobar = new quicklock(obj);
+```
 
-## Versioning
+### Back-End
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+```
+/checkserver : quicklock.js calls this endpoint to verify a connection to the server.
+/lock : quicklock.js calls this endpoint to lock the webpage.
+/unlock?pin=<[0-9]> : quicklock.js calls this endpoint to unlock the webpage.
+```
 
 ## Author
 
-* **Joshua Schultheiss** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Joshua Schultheiss**
 
 ## Acknowledgments
 
-* [John Bambenek](http://www.bambenekconsulting.com) and his [cyber security lab](https://courses.engr.illinois.edu/cs460/sp2010/).
+* Special thanks to [John Bambenek](http://www.bambenekconsulting.com) and his [cyber security lab](https://courses.engr.illinois.edu/cs460/sp2010/) for an opportunity to do a fun project!
