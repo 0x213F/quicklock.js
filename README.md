@@ -15,6 +15,15 @@ npm install path
 
 ## Running the Demo
 
+Run the following command in terminal. Log in using the credentials "myUser" for username and "p4assw0rd" for password. To unlock the webpage via PIN, enter 4833.
+
+```
+cd demo/
+node server.js myUser p4ssw0rd 4833 5 2000
+```
+
+Customize how the demo runs by fiddling with the parameters.
+
 ```
 cd demo/
 node server.js <username> <password> <PIN> <# of allowed PIN attempts> <connection interval>
@@ -47,6 +56,10 @@ var foobar = new quicklock(obj);
 /lock : quicklock.js calls this endpoint to lock the webpage.
 /unlock?pin=<[0-9]> : quicklock.js calls this endpoint to unlock the webpage.
 ```
+
+## Note
+
+Both the front-end and back-end have a "servertimeout" property. These must be the same!
 
 ## Author
 
