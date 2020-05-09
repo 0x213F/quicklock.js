@@ -178,7 +178,6 @@ function quicklock(data) {
     };
 
     this.unlockattempt = function() {
-        console.log("fdsasdfa")
         var xhr;
         xhr = new XMLHttpRequest();
         xhr.open('GET', data.url + "unlock?pin=" + this.pin);
@@ -193,8 +192,6 @@ function quicklock(data) {
                 } else {
                     // do nothing
                 }
-            } else {
-                console.log(xhr.readyState);
             }
         }
         xhr.send();
